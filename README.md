@@ -66,10 +66,44 @@ PreparedStatement 을 사용 정적쿼리 방식으로 미리만들어진 쿼리
  8) 컬럼 데이터 추출
    -> ID:admin'union select idx,userid,userpw,username,5,6
       from board_member#
-          
+ 
+ 학생활동 --> 기말대체 과제일수도있다.
+ 1. SQL삽입공격의실제사례를분석해본다
+ 2. SQL 삽입공격의유형을조사해본다
+ 3. 보안정보공유체계(CVE, CWE, NVD)에서SQL 삽입공격을찾아본다.
+ 4. SQL 삽입공격유형별방어대책에대해조사해본다  --> 디테일하게 기말대체는 보지않는다.
+https://cwe.mitre.org/data/definitions/1350.html
+https://cwe.mitre.org/data/definitions/89.html
+https://www.cvedetails.com/cve/CVE-2021-27928/
+https://mariadb.com/kb/en/security/
+들어가서 cwe list -> latest version -> 네랴서 cwe top25
+아니면 구글에 ex) sql-injection cve -> detail 들어가기 
          
-         
-         
+
+# 12주차
+# 운영체제 명령어 삽입
+개요 : 적절한 검증 절차를 거치지 않은 웹페이지나 웹서버에서 사용자가 입력값이
+      명령어의 일부 또는 전부로 구성되어 실행되는 경우 의도하지 않은 시스템
+      명령어가 실행되어 부적절하게 권한이 변경되거나 시스템 동작에 악영향을 미친다.
+      
+<공격>
+ 프록시 파로스 키고  request 잡고 시큐어코딩테스트 -> 명령어 인젝션
+ data=dir 을 받으면 웹서버에서는 자신의 디렉토리정보를 윈도우 커맨드로 날린다음
+ 화면에 나타나졋다. 이것을 예측해 data=notepad 로 변경하면 메모장이 켜진다.
+ 
+ <방어>
+ data=type 을 바로 받아서 커맨드를 바로 사용하는 것이 아니라
+ index나 정수 값을 받아서 그것에 매칭되는 커맨드를 배열에 꺼내 사용하면
+ 약속된 커맨드만 서버쪽으로 전달할수있다.
+ 
+ 실습: openeg->src-> testcontroller.java
+   -> #Command 인젝션으로 가서 -> 코드 수정
+   
+ 
+      
+ 
+      
+      
          
          
          
