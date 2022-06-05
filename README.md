@@ -151,7 +151,69 @@ Reflective XSS
    -> 다시공격하면 세션아이디확인 , httponly(반사공격을 막아내는 보안옵션)
 
 
-         
+# 13주차
+pwnsshell 다운
+# 파일 업로드/ 다운로드 취약점
+
+-파일 업로드 기능시 취약점 발생원인
+ 1. 파일의 타입을 제한하지 않는경우
+ 2. 파일의 크기ㄷ나 갯수를 제한하지 않는경우
+ 3. 파일을 외부에서 직접적으로 접근가능한 경우
+ 4. 파일의 이름과 저장된 파일의 이름이 동일하여 공격자가 파일에 대한 
+    인식이 가능한 경우
+ 5. 파일이 실행권한이 있는 경우
+ 
+ -파일 다운로드 기능시 취약점 발생원인
+ 1. 파일에 대한 접근권한이 없는 사용자가 직접적인 경로를 이용하여 파일을 다운로드       할수 있는 경우
+ 2. 악성코드에 감염된 파일을 다운로드 허용하는 경우
+
+
+# 실습-
+업로드
+ 1. 업로드 경로 확인
+ 2. 업로드 파일명과 같은 명으로 파일을 업로드후 직접 접근되는지 
+ 3. 웹쉘 테스트
+# 업로드파일 방어
+ 1. 업로드되는 파일의 타입을 제한
+  file.getContentType().contains("image")){
+  //업로드 파일명
+  String fileName=file.getOriginalFilename();
+  if (fileName.toLowerCase().endWith(".jpg")){
+
+ 2. 저장경로를 외부에서 파일 직접접근이 불가능하게 
+  String uploadPath=session.getServletContext().getRealPath("/")
+       +"WEB-INF/files/";
+ 
+ 3. 업로드 파일의 크기를 제한
+  if(file!=null&&"".equals(file.getOriginalFilename())
+    &&file.getSize()<1024000 &&
+ 
+ 한후 
+ 업로드 파일 다시확인 , 저장위치확인 및 파일을 얻어올수 있도록
+ @RequestMapping(value="/write.do",method=RequestMethod.POST)
+ 
+ WEB=INF 보드부분 뷰파일 찾은후
+ <a href="get_image.do?idx=${board.idx}"
+    
+# 파라미터 조작
+-파라미터 조작과 잘못된 접근제어의 정의/
+관리자 페이지와 같이 인가된 특정사용자만 사용가능한 페이지에 대해
+올바른 접근권한 레벨을 정의하고 점검하는 프로세스가 제대로 적용되어있지 않은경우
+-> 공격자는 특정 파라미터를 조작해 목적을 달성한다.
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
          
          
          
